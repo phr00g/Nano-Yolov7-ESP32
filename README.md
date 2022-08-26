@@ -148,7 +148,29 @@ https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32
 #define SSID1 "replace with your wifi ssid"
 #define PWD1 "replace your wifi password"
 ```
-- Now on ArduinoIDE upload the code, and open the Serial Monitor
+- Now on ArduinoIDE upload the code, and open the Serial Monitor, setting it to 115200 baud
+- Press the reset button on the ESP32 cam, and you should see an output similar to the following:
+```
+192.168.1.42
+Stream Link: http://192.168.1.42/mjpeg/1
+```
+- This is the stream link we are going to use on the Nano, with Yolov7
+---
+
+## On the Jetson Nano, change directories to the yolov7 repo we cloned earlier
+
+- Run the following command
+
+```
+python3 detect.py --source http://192.168.1.42/mjpeg/1
+```
+<i>Obviously, replace this stream link with the one you obtained from ArduinoIDE</i>
+
+## Now, we have run Yolov7 inference object detection on the Jetson Nano, using the ESP32 wifi camera.
+
+- Below is a video capture of me running Yolov7 on my Jetson Nano
+https://www.youtube.com/watch?v=IZY73M8Pzbk
+
 
 
 
