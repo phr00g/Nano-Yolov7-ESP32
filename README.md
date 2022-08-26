@@ -168,7 +168,7 @@ python3 detect.py --source http://192.168.1.42/mjpeg/1
 
 ## Now, we have run Yolov7 inference object detection on the Jetson Nano, using the ESP32 wifi camera.
 
-- Below is a video capture of me running Yolov7 on my Jetson Nano
+- The following is a video capture of me running Yolov7 on my Jetson Nano
 https://www.youtube.com/watch?v=IZY73M8Pzbk
 
 
