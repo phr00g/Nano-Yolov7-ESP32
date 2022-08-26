@@ -70,6 +70,86 @@ sudo apt-get install libopenblas-base libopenmpi-dev libomp-dev
 
 ```
 <i>Note: Installing PyTorch can take between 15-30 minutes</i>
+---
+
+## Now check to see if PyTorch is installed, with GPU enabled
+
+```
+python3
+>>> import torch
+>>>torch.cuda.is_available()
+```
+## If we get True, we can move on to the TorchVision Installation
+<i> Before, we need to install some more linux dependencies</i>
+```
+sudo apt-get install libjpeg-dev zlib1g-dev libpython3-dev libavcodec-dev libavformat-dev libswscale-dev
+```
+## Now we need to clone the torchvision repo, using v0.9.0 because it is compatible with PyTorch v1.8, which we just installed
+
+``` 
+git clone --branch v0.9.0 https://github.com/pytorch/vision torchvision
+
+cd torchvision
+
+python3 setup.py install
+```
+<i>Note: Torchvision can take up to 40 minutes to install</i>
+
+---
+## Now, we install some linux and python packages, and set the an environment variable:
+
+
+```
+sudo apt install libfreetype6-dev
+export OPENBLAS_CORETYPE=ARMV8 python3
+sudo apt-get install python3-seaborn
+
+sudo apt-get install python3-pil
+python3 -m pip install future
+pip3 install 'pillow<7'
+pip3 install tdqm
+
+```
+
+## Now that we have setup and installed all dependencies required to run Yolov7, clone the repo
+
+```
+git clone https://github.com/WongKinYiu/yolov7
+
+cd yolov7
+```
+---
+
+# Before running Yolov7's inference, we must setup the ESP32 camera:
+
+- On a different machine, install <a href='https://www.arduino.cc/en/software'>Arduino IDE</a>
+- Now clone this repository, that has the code we need to flash the ESP32
+``` 
+git clone https://github.com/arkhipenko/esp32-cam-mjpeg.git
+cd esp32-cam-mjpeg
+```
+## Before flashing, open and setup ArduinoIDE so that it is compatible with our board
+- Under the file dropdown menu, to preferences, and paste this link in the field that says 'Additional Board Manager URLs'
+https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
+- Now click on tools, Board, and then Board Manager
+- Search for esp32 in the search bar, and install the first package that appears
+- Plug in your ESP32 cam via microUSB to your computer
+- Click on Tools, the click on Board, and select 'AI Thinker ESP32-CAM'
+- Click on Tools, then choose any available Ports
+- Open a terminal and change directories to the esp32-cam-mjpeg repo we just downloaded 
+- Open esp32_camera_mjpeg.ino file with Arduino IDE
+- In the file, comment out the line that says 
+> #define CAMERA_MODEL_ESP_EYE
+- And uncomment the line that says 
+> //#define CAMERA_MODEL_AI_THINKER
+- In the same directory make a file called "home_wifi_multi.h", drop in the following code, and save. Replace the strings with your Wifi station name, and password
+
+```
+#define SSID1 "replace with your wifi ssid"
+#define PWD1 "replace your wifi password"
+```
+- Now on ArduinoIDE upload the code, and open the Serial Monitor
+
 
 
 
